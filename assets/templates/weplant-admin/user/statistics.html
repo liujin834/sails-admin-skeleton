@@ -1,0 +1,113 @@
+<h1 class="page-header">统计</h1>
+
+<div class="row">
+  <div id="register-chart" class="col-lg-12" style="height: 500px;"></div>
+</div>
+<script type="text/javascript">
+  $(function () {
+    $('#register-chart').highcharts('StockChart',{
+      chart: {
+        type: 'line',
+        inverted : false,
+        zoomType: 'xy',
+        showAxes : true
+      },
+      credits : {
+        enabled : false
+      },
+      title: {
+        text: '新注册数'
+      },
+      subtitle: {
+        text: ''
+      },
+      xAxis: {
+        title: {
+          enabled: true,
+          text: '时间'
+        },
+        type : 'datetime',
+        startOnTick: false,
+        endOnTick: false,
+        showLastLabel: true,
+        allowDecimals : false
+      },
+      yAxis: {
+        title: {
+          text: '注册数'
+        }
+      },
+      legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'top',
+        floating: false,
+        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
+        borderWidth: 1
+      },
+      plotOptions: {
+        scatter: {
+          marker: {
+            radius: 5,
+            states: {
+              hover: {
+                enabled: true,
+                lineColor: 'rgb(100,100,100)'
+              }
+            }
+          },
+          states: {
+            hover: {
+              marker: {
+                enabled: false
+              }
+            }
+          },
+          tooltip: {
+            headerFormat: '<b>{series.name}</b><br>',
+            pointFormat: 'time : {point.x} , count : {point.y} '
+          }
+        }
+      },
+      rangeSelector: {
+        selected: 30
+      }
+
+    });
+  });
+
+  $.getJSON('/user/statistics', function(data){
+    var chart = $('#register-chart').highcharts();
+    var values = [];
+
+    var chartData = data.model;
+
+    for(var i in chartData){
+      values.push({
+        "name" : chartData[i].ts,
+        "x" : Date.UTC(chartData[i].year,chartData[i].month,chartData[i].day),
+        "y" : chartData[i].count
+      });
+    }
+
+    var dev = {
+      name : '新注册人数',
+      type : 'bar',
+      data : values
+    };
+
+    console.log(dev);
+
+    chart.addSeries(dev);
+
+    if(values.length < 30){
+      chart.setOptions({rangeSelector: {
+        selected: 0
+      }})
+    }
+
+//    for(var i in data){
+//      chart.addSeries(data[i]);
+//    }
+  });
+</script>

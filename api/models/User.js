@@ -7,8 +7,36 @@
 
 module.exports = {
 
-  attributes: {
+  tableName: 'user',
+  autoCreatedAt: false,
+  autoUpdatedAt: false,
 
-  }
+  attributes: {
+    id : {
+      type: 'integer',
+      required: true,
+      primaryKey: true
+    },
+    name : {
+      type: 'string',
+      required: true
+    },
+    phone : {
+      type: 'string',
+      required: false
+    },
+    email : {
+      type: 'string',
+      required: false
+    },
+    signature : {
+      type: 'string',
+      required: false
+    },
+    "time_create" : {
+      type: 'datetime',
+      required: true
+    }
+  } //attributes
 };
 

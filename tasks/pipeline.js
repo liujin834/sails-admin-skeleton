@@ -37,6 +37,7 @@ var jsFilesToInject = [
   'bower_components/angular-mocks/angular-mocks.js',
   'bower_components/angular-bootstrap/ui-bootstrap.js',
   'bower_components/angular-socket-io/socket.js',
+  'bower_components/highcharts/highstock.src.js',
 
   // Dependencies like jQuery, or Angular are brought in here
   'js/dependencies/**/*.js',

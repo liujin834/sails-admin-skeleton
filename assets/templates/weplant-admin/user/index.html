@@ -1,1 +1,10 @@
-<div>haha</div>
+<h1 class="page-header">用户管理</h1>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <tr ng-repeat="x in list">
+      <td>{{ x.name }}</td>
+      <td>{{ x.time_create }}</td>
+    </tr>
+  </table>
+</div>

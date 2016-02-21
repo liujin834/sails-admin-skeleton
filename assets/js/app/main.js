@@ -18,6 +18,10 @@ weplantAdmin.config(['$routeProvider',
       templateUrl: '/templates/weplant-admin/user/index.html',
       controller: 'userIndexController'
     }).
+    when('/user/statistics', {
+      templateUrl: '/templates/weplant-admin/user/statistics.html',
+      controller: 'userStatisticsController'
+    }).
     otherwise({
       redirectTo: '/'
     });
